@@ -21,10 +21,9 @@ public interface TodoRepo extends JpaRepository<TodoModel, Long> {
     Page<TodoModel> findTodoModelByTodoStatusOrderByCreatedAt(String status, Pageable pageable)
             throws NotFoundException;
 
-    @Query(value = "SELECT m FROM TodoModel m WHERE m.startDate = ?1 OR m.endDate = ?1 ORDER BY m.startDate DESC", nativeQuery = true)
+    @Query(value = "SELECT m FROM TodoModel m WHERE m.startDate = ?1 OR m.endDate = ?1 ORDER BY m.startDate DESC")
     Page<TodoModel> fetchByDate(Long dateSearchIndex, Pageable pageable)
             throws NotFoundException;
-
 
 }
 
