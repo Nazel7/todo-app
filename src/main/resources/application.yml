@@ -1,0 +1,24 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: '@project.name@'
+    version: '@project.version@'
+    description: '@project.description@'
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/todo_DB?useSSL=false&serverTimezone=UTC
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, loggers, trace, docs, mappings

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Properties>
+        <Property name="LOG_PATTERN"> %highlight{%d [%-2level] --- [%5t] %-50c{1.} : %msg %n}{FATAL=red blink, ERROR=red,
+            WARN=yellow bold, INFO=green bold, DEBUG=dark, TRACE=blue}</Property>
+    </Properties>
+
+<!--    Printer location declaration-->
+    <Appenders>
+        <console name="console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false" pattern="${LOG_PATTERN}"/>
+        </console>
+        <File name="file_log" fileName="logs\todo_log-cache.log">
+            <PatternLayout disableAnsi="false" pattern="${LOG_PATTERN}"/>
+        </File>
+    </Appenders>
+
+<!--    Logger level declaration-->
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="file_log" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="file_log" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="file_log" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="file_log" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+
+</Configuration>
