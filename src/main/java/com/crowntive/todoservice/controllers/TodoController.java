@@ -94,17 +94,4 @@ public class TodoController {
         return new ResponseEntity<>(todoResponseObject, HttpStatus.OK);
     }
 
-    @GetMapping("/date")
-    public ResponseEntity<Page<TodoResponse>> fetchTodoHistoryByDateRange(
-            @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam("searchDateIndex") String searchDateIndex)
-            throws NotFoundException, ParseException {
-
-        final Page<TodoResponse> todoResponseObject=
-                mTodoService.fetchTodoHistoryByDate(page, size, searchDateIndex);
-
-        return new ResponseEntity<>(todoResponseObject, HttpStatus.OK);
-    }
-
 }
