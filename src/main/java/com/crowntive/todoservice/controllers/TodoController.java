@@ -40,7 +40,7 @@ public class TodoController {
 
         final TodoResponse todoResponse= mTodoService.createTodo(todoDto);
 
-        return new ResponseEntity<>(todoResponse, HttpStatus.OK);
+        return new ResponseEntity<>(todoResponse, HttpStatus.CREATED);
     }
 
     @GetMapping(" ")
