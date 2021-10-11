@@ -52,7 +52,7 @@ public class TodoService implements ITodoService {
 
         final Optional<TodoModel> todoModelOptional = mTodoRepo.findById(todoId);
         final TodoModel todoModel;
-        Date endDate = TodoUtil.getDate(todoUpdateDto.getEndDate());
+        Date endDate = TodoUtil.getDate(todoUpdateDto.getUpdateEndDate());
 
         if (todoModelOptional.isEmpty()) {
             log.error("::: Todo Item not found with id: [{}] :::", todoId);
@@ -64,13 +64,14 @@ public class TodoService implements ITodoService {
         if (todoModel.getStartDate() > endDate.getTime()) {
             throw new IllegalArgumentException("StartDate cannot be more than EndDate");
         }
-
         if (endDate.getTime() > 0) {
             todoModel.setEndDate(endDate.getTime());
         }
-
         if (todoUpdateDto.getTaskDescription() != null) {
             todoModel.setTaskDescription(todoUpdateDto.getTaskDescription());
+        }
+        if (todoUpdateDto.getUpdateToCompleted() != null ){
+            todoModel.setTodoStatus(TodoStatus.COMPLETED.name());
         }
 
         final TodoModel savedTask = mTodoRepo.save(todoModel);

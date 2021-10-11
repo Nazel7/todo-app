@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import javax.swing.*;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,5 +17,7 @@ public class TodoUpdateDto {
 
     private String taskDescription;
 
-    private String endDate;
+    private String updateToCompleted;
+
+    private String updateEndDate;
 }
