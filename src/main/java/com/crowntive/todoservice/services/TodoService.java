@@ -70,7 +70,8 @@ public class TodoService implements ITodoService {
         if (todoUpdateDto.getTaskDescription() != null) {
             todoModel.setTaskDescription(todoUpdateDto.getTaskDescription());
         }
-        if (todoUpdateDto.getUpdateToCompleted() != null ){
+        if (todoUpdateDto.getUpdateToCompleted() != null) {
+            TodoStatus.getTodo(todoUpdateDto.getUpdateToCompleted());
             todoModel.setTodoStatus(TodoStatus.COMPLETED.name());
         }
 
