@@ -20,4 +20,18 @@ public enum TodoStatus {
         throw new NotFoundException("TodoStatus not found of value: "+ statusValue);
 
     }
+
+    public static boolean isTodoStatus(String statusValue) throws NotFoundException {
+
+        for (TodoStatus todoStatus: TodoStatus.values()){
+            if (todoStatus.toString().equalsIgnoreCase(statusValue)){
+
+                return true;
+            }
+        }
+
+       return false;
+
+    }
+
 }

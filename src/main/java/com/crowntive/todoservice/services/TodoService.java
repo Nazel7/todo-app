@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +37,20 @@ public class TodoService implements ITodoService {
     private final TodoRepo mTodoRepo;
 
     @Override
-    public TodoResponse createTodo(TodoDto todoDto) throws RuntimeException, ParseException {
+    public TodoResponse createTodo(TodoDto todoDto)
+            throws RuntimeException, ParseException, NotFoundException {
         log.info("::: Creating todo task in progress......");
+        String title = TodoUtil.enforceSingleSpaceText(todoDto.getTitle());
+        String taskDecription = TodoUtil.enforceSingleSpaceText(todoDto.getTaskDescription());
 
+        TodoModel modelVerify =
+                mTodoRepo.getTodoByTitleAndDecription(title,
+                                                      taskDecription);
+        if (modelVerify != null) {
+            throw new IllegalArgumentException(
+                    "Todo title or description already exist in your list, "
+                            + "Please try again");
+        }
         final TodoModel model = TodoBuilder.mapToModel(todoDto);
         final TodoModel savedTask = mTodoRepo.save(model);
         log.info("::: Todo created successfully with data: [{}]", savedTask);
@@ -127,20 +140,27 @@ public class TodoService implements ITodoService {
 
     @Override
     public Page<TodoResponse> fetchTodoHistory(int page, int size, String searchIndex)
-            throws NotFoundException {
+            throws NotFoundException, ParseException {
 
         log.info("::: Retrieving Todd History in progress.....");
         final List<TodoResponse> todoResponses = new ArrayList<>();
         final Pageable todoPages = PageRequest.of(page - 1, size);
         final Page<TodoModel> todoModelPage;
-        final TodoStatus todoStatus = TodoStatus.getTodo(searchIndex);
+        final boolean isDateMatch = TodoUtil.isMatchDate(searchIndex);
+        final boolean isStatusAvailable = TodoStatus.isTodoStatus(searchIndex);
 
         // Fetch TodoModel by status if searchIndex is String of TodoStatus enum value
-        if (searchIndex.trim().toString().length() > 0) {
-            todoModelPage =
-                    mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(todoStatus.name(),
-                                                                        todoPages);
-        } else {
+       if (isDateMatch){
+
+             return fetchTodoHistoryByDate(page, size, searchIndex);
+
+        }
+       else if (isStatusAvailable) {
+
+           todoModelPage =
+                   mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(searchIndex, todoPages);
+       }
+        else {
             todoModelPage = mTodoRepo.findAll(todoPages);
         }
 

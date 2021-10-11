@@ -87,7 +87,7 @@ public class TodoController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam("searchIndex") String searchIndex)
-            throws NotFoundException {
+            throws NotFoundException, ParseException {
 
         final Page<TodoResponse> todoResponseObject= mTodoService.fetchTodoHistory(page, size, searchIndex);
 

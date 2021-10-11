@@ -12,7 +12,8 @@ import javassist.NotFoundException;
 
 public interface ITodoService {
 
-    TodoResponse createTodo(TodoDto todoDto) throws RuntimeException, ParseException;
+    TodoResponse createTodo(TodoDto todoDto)
+            throws RuntimeException, ParseException, NotFoundException;
 
     TodoResponse updateTodo(Long todoId, TodoUpdateDto todoUpdateDto)
             throws NotFoundException, ParseException;
@@ -24,7 +25,7 @@ public interface ITodoService {
     Page<TodoResponse> fetchTodosAcitve(int page, int size) throws NotFoundException;
 
     Page<TodoResponse> fetchTodoHistory(int page, int size, String searchIndex)
-            throws NotFoundException;
+            throws NotFoundException, ParseException;
 
     Page<TodoResponse> fetchTodoHistoryByDate(int page, int size, String dateSearchIndex)
             throws NotFoundException, ParseException;
