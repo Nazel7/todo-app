@@ -41,8 +41,8 @@ public class SwaggerConfig {
         return new ApiInfo(applicationName, applicationDescription, applicationVersion, "",
                 new Contact(
                         "Code Engine",
-                        "https://www.codeengine.com",
-                        "info@codeengine.com"),
+                        "https://www.codeengineroom.com.ng",
+                        "info@codeengineroom.com.ng"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0", Collections.emptyList());
     }

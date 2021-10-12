@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TodoUtil {
 
     public static final String DATE_MATCHER = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     public static Page<TodoResponse> getTodoResponses(List<TodoResponse> todoResponses,
                                                        Pageable todoPages, Page<TodoModel> todoModelPage) {
@@ -47,7 +48,7 @@ public class TodoUtil {
     }
 
     public static Date getDate(String dateString) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        return new SimpleDateFormat(DATE_FORMAT).parse(dateString);
     }
 
     public static boolean isMatchDate(String dateParam){
