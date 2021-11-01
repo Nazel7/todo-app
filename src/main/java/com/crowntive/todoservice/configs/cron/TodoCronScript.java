@@ -41,11 +41,7 @@ public class TodoCronScript {
         Page<TodoModel> todoModelsPage =
                 mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(TodoStatus.ACTIVE.name(),
                                                                     todoPages);
-//        int startIndex = (int) todoPages.getOffset();
-//        int endIndex = Math.min((startIndex + todoPages.getPageSize()),
-//                                todoModelsPage.getContent().size());
-//        List<TodoModel> subList = todoModelsPage.getContent().subList(startIndex, endIndex);
-//
+
         for (int i = 0 ; i <= todoModelsPage.getTotalPages(); i++) {
           todoPages = PageRequest.of(i, size);
             todoModelsPage = mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(TodoStatus.ACTIVE.name(),
