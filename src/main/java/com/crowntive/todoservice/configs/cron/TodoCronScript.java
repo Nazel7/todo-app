@@ -19,6 +19,8 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import static java.lang.Thread.sleep;
+
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -39,14 +41,16 @@ public class TodoCronScript {
         Page<TodoModel> todoModelsPage =
                 mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(TodoStatus.ACTIVE.name(),
                                                                     todoPages);
-        int startIndex = (int) todoPages.getOffset();
-        int endIndex = Math.min((startIndex + todoPages.getPageSize()),
-                                todoModelsPage.getContent().size());
-        List<TodoModel> subList = todoModelsPage.getContent().subList(startIndex, endIndex);
-
-        for (int i = 0; i <= todoModelsPage.getTotalPages(); i++) {
-
-            for (TodoModel model : subList) {
+//        int startIndex = (int) todoPages.getOffset();
+//        int endIndex = Math.min((startIndex + todoPages.getPageSize()),
+//                                todoModelsPage.getContent().size());
+//        List<TodoModel> subList = todoModelsPage.getContent().subList(startIndex, endIndex);
+//
+        for (int i = 0 ; i <= todoModelsPage.getTotalPages(); i++) {
+          todoPages = PageRequest.of(i, size);
+            todoModelsPage = mTodoRepo.findTodoModelByTodoStatusOrderByCreatedAt(TodoStatus.ACTIVE.name(),
+                                                                                 todoPages);
+            for (TodoModel model : todoModelsPage.getContent()) {
                 if (model.getEndDate() < System.currentTimeMillis()) {
                     model.setTodoStatus(TodoStatus.INACTIVE.name());
                     counter++;
@@ -54,6 +58,7 @@ public class TodoCronScript {
                     TodoModel deactivatedTodoModel = mTodoRepo.save(model);
                     log.info("::: Todo deactivated successfully with data: [{}]",
                              deactivatedTodoModel);
+                    sleep(2000);
                 }
             }
 
