@@ -6,19 +6,31 @@ spring:
     name: '@project.name@'
     version: '@project.version@'
     description: '@project.description@'
+    past-due-cron: '* * */24 * * *'
+  mvc:
+    servlet:
+      path: /apis/todo-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/todo_DB?useSSL=false&serverTimezone=UTC
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-
+    url: jdbc:h2:mem:todoDB
+    username: password
+    password: password
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
 
 management:
   endpoints:
     web:
       exposure:
         include: info, health, loggers, trace, docs, mappings
+
+page:
+  size: 20
