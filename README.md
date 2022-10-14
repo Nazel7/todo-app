@@ -50,7 +50,7 @@ In recent time, solutions I have built from scratch are not limited to the follo
 My current role span through vendor interfacing, training developers and managing processes on bankend engineering
 ```
 
-5. A quick dive into the mini project architecture
+2. A quick dive into the mini project architecture
 ```
 1. Notable stack and library used are but not limited to: Java, Spring boot, Hibernate, Lombok, H2 Database,
  hibernate-validator, spring-boot actuator, log4j, Mockito and AssertJ for testing
