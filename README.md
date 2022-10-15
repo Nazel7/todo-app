@@ -19,6 +19,18 @@ docker with name:  docker.io/nazel7/td-todoservice:0.0.1-SNAPSHOT
 ./mvnw test
 
 ```
+
+## Build project And Run locally
+```
+./mvnw clean install -DskipTests
+Options
+1. Go to the main class and run the project.
+2. run through java command:  java -jar target/todoservice-0.0.1-SNAPSHOT.jar
+3. run as a spring project if you do not have maven install: ./mvnw spring-boot:run
+4. run as a spring project if you have maven install: mvn spring-boot:run
+
+```
+
 ### Run on Docker
 
  instantiate image container on port 8090
