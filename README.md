@@ -52,7 +52,7 @@ My current role span through vendor interfacing, training developers and managin
 
 2. A quick dive into the mini project architecture
 ```
-1. Notable stack and library used are but not limited to: Java, Spring boot, Hibernate, Lombok, H2 Database,
+1. Notable stack and library used are but not limited to: Java, Spring boot, Hibernate, Lombok, H2 Database, swagger, docker
  hibernate-validator, spring-boot actuator, log4j, Mockito and AssertJ for testing
 2. Application decouply following SOLID principles and using alot of factory pattern for seperation of concern and also 
    builder pattern and lombok was also used for pojo enrichment with hibernate validation for schema enrichement i.e no traditional setter and getter 
