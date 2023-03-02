@@ -33,7 +33,6 @@ public class TodoUtil {
         for (TodoModel model : todoModels) {
             TodoResponse todoResponse = TodoBuilder.mapToDomain(model);
             todoResponses.add(todoResponse);
-
         }
 
         // Convert List of TodoResponse retrieved by Pages
@@ -45,8 +44,7 @@ public class TodoUtil {
         int endIndex = Math.min((startIndex + todoPages.getPageSize()), todoResponses.size());
         List<TodoResponse> subList = todoResponses.subList(startIndex, endIndex);
 
-        log.info("::: Total of [{}] Todo Items history returned with sub-data: [{}]",
-                 todoModels.size(), subList);
+        log.info("::: Total of [{}] Todo Items history returned with sub-data: [{}]", todoModels.size(), subList);
         return new PageImpl<>(subList, todoPages, todoResponses.size());
     }
 
